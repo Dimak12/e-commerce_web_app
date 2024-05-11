@@ -148,6 +148,7 @@ export default {
         width: 20px;
         border-color: red;
         color: red;
+        background-color: white;
     }
 
     .title{
