@@ -14,5 +14,5 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  base: '/e-commerce_web_app/./',
+  base: '/e-commerce_web_app/',
 })
