@@ -1,6 +1,8 @@
+<!-- Products.vue -->
 <template>
-    <div class="main">
-        <div class="items" v-for="product in products" :key="product.id">
+    <div class="products-container">
+        <div class="main">
+        <div class="items" v-for="product in productStore.products" :key="product.id">
             <img :src="product.image" class="product-image" />
             <div class="details">
                 <div class="title">{{product.title}}</div>
@@ -8,50 +10,46 @@
                 <div class="price">${{product.price}}</div>
             </div>
             <div class="add">
-                <button class="cart-btn" @click="addToCart(product)"><font-awesome-icon :icon="['fas', 'cart-plus']" size="2x"/></button>
+                <button class="cart-btn" @click="cartStore.addToCart(product)"><font-awesome-icon :icon="['fas', 'cart-plus']" size="2x"/></button>
             </div>
         </div>
+    </div>
     </div>
     
     
 </template>
 
-<script>
+<script >
+import { useproductStore } from '../stores/products';
+import { useCartStore } from '@/stores/cartStore';
 
-export default {
+export default{
+    setup (){
+       const  productStore = useproductStore()
+       const cartStore = useCartStore()
 
-    data(){
-        return {
-            products:[],
-            cart:[]
-        }
-    },
-    
-    mounted(){
-        fetch('https://fakestoreapi.com/products')
-            .then(res => res.json())
-            .then(data => this.products = data)
-            .catch(err => console.log(err.message))
-    },
+       productStore.fetchProducts()
 
-    methods: {
-        addToCart(product){
-            this.cart.push(product);
-            console.log('items: ',this.cart)
-        }
+       return {productStore, cartStore}
     }
 }
+
 </script>
 
 <style scoped>
-    .main {
-        flex: 1;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        background-color: white;
-        padding: 20px;
-        gap: 20px;
-    }
+    .products-container {
+  max-height: calc(100vh - 130px);
+  overflow-y: auto;
+  padding-bottom: 20px; 
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  background-color: white;
+  padding: 20px;
+  gap: 20px;
+}
 
     .items{
         display: grid;
@@ -106,6 +104,7 @@ export default {
     .category{
         margin-bottom: 10px;
     }
+    
 
        
 </style>

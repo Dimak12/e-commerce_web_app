@@ -13,10 +13,11 @@ export default {
 
 <style scoped>
     .main {
-        flex: 1;
+        display: flex;
         background-color: white;
-        text-align: center;
-        align-content: center;
+        align-items: center;
+        justify-content: center;
+        height: 830px;
 
     }
 </style>

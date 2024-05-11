@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory} from 'vue-router';
-import Home from '../views/Home'
-import Products from '../views/Products'
-import About from '../views/About'
-import Contacts from '../views/Contacts'
-import Cart from '../views/Cart'
+import Home from '../views/Home.vue'
+import Products from '../views/Products.vue'
+import About from '../views/About.vue'
+import Contacts from '../views/Contacts.vue'
+import Cart from '../views/Cart.vue'
 
 const routes = [
     {
-        path: '/home',
+        path: '/',
         name: 'Home',
         component: Home 
     },
@@ -39,7 +39,7 @@ const routes = [
 ]
 
 const router = createRouter({
-    history: createWebHistory(process.env.BASE_URL),
+    history: createWebHistory(import.meta.env.BASE_URL),
     routes
 })
 

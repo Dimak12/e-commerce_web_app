@@ -1,8 +1,8 @@
 <template>
     <header>
         <div class="logo">
-            <router-link to="/home" class="router-link"><i class="fa-regular fa-hand-peace"></i></router-link>
-            <router-link to="/home" class="router-link">My Store</router-link>
+            <router-link to="/" class="router-link"><i class="fa-regular fa-hand-peace"></i></router-link>
+            <router-link to="/" class="router-link title">My Store</router-link>
         </div>
         <nav>
             <ul class="nav_links">
@@ -14,22 +14,33 @@
             </ul>
             
         </nav>
-        <router-link class="cart" to="/cart"><button><font-awesome-icon :icon="['fas', 'cart-shopping']" size="2x"/></button></router-link>
+        <router-link class="cart" to="/cart">
+            <button>
+                <font-awesome-icon :icon="['fas', 'cart-shopping']" size="2x"/>
+                <span class="cart-count" v-if="cartStore.cart.length > 0">{{ cartStore.cart.length }}</span>
+            </button>
+        </router-link>
     </header>
 </template>
 
 <script>
+
+import { useCartStore } from '@/stores/cartStore';
+
 export default {
-    name:'Header'
+    
+    name:'Header',
+    setup () {
+        const cartStore = useCartStore()
+
+        return {cartStore}
+    }
 }
 </script>
 
 <style scoped>
 
     *{
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
         background-color: #34b3a0;
     }
 
@@ -66,6 +77,7 @@ export default {
     .nav_links{
         list-style: none;
         font-size: 20px;
+        font-weight: bold;
         
     }
 
@@ -92,7 +104,25 @@ export default {
     }
 
     .cart{
+        display:flex;
         justify-self: end;
+        text-decoration: none;
+        flex:1;
     }
+
+    .title{
+        font-weight: bold;
+    }
+
+    .cart-count {
+        background-color: rgb(204, 43, 43);
+        color: white;
+        border-radius: 50%;
+        padding: 2px 6px;
+        font-size: 12px;
+        position: absolute;
+        top: 0;
+        right: 1;
+}
 
 </style>
