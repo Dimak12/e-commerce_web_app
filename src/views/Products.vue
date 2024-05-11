@@ -86,6 +86,7 @@ export default{
         width: 50px;
         border: 3px solid;
         cursor: pointer;
+        background-color: white;
 
     } 
 
