@@ -1,16 +1,16 @@
 <template>
     <header>
         <div class="logo">
-            <router-link to="/" class="router-link"><i class="fa-regular fa-hand-peace"></i></router-link>
-            <router-link to="/" class="router-link title">My Store</router-link>
+            <router-link to="/" class="router-link"><i class="fa-solid fa-store"></i></router-link>
+            <router-link to="/" class="router-link title">Goodies Store</router-link>
         </div>
         <nav>
             <ul class="nav_links">
                 <li><router-link to="/products" class="link">Products</router-link></li>
                 <li>|</li>
-                <li><router-link to="/about" class="link">About</router-link></li>
-                <li>|</li>
                 <li><router-link to="/contacts" class="link">Contacts</router-link></li>
+                <li>|</li>
+                <li><router-link to="/about" class="link">About</router-link></li>
             </ul>
             
         </nav>
@@ -75,9 +75,11 @@ export default {
     }
     
     .nav_links{
+        display: flex;
         list-style: none;
         font-size: 20px;
         font-weight: bold;
+        justify-content: center;
         
     }
 
@@ -90,6 +92,7 @@ export default {
 
     .link{
         color: inherit; 
+        text-decoration: none;
         
     }
 

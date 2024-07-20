@@ -1,8 +1,7 @@
 <template>
     <footer>
         
-        <p>My Store</p>
-        <p>Copyrights OctoBytes 2020</p>
+        <p>Goodies Store</p>
     </footer>
 </template>
 
@@ -17,7 +16,7 @@ export default {
 <style scoped>
     footer{
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         height: 50px;
         background-color: #34b3a0;

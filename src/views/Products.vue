@@ -2,7 +2,7 @@
 <template>
     <div class="products-container">
         <div class="main">
-        <div class="items" v-for="product in productStore.products" :key="product.id">
+        <div class="items" v-for="product in products" :key="product.id">
             <img :src="product.image" class="product-image" />
             <div class="details">
                 <div class="title">{{product.title}}</div>
@@ -20,17 +20,28 @@
 </template>
 
 <script >
-import { useproductStore } from '../stores/products';
 import { useCartStore } from '@/stores/cartStore';
 
-export default{
-    setup (){
-       const  productStore = useproductStore()
-       const cartStore = useCartStore()
+export default {
+    
+    setup () {
+        const cartStore = useCartStore()
 
-       productStore.fetchProducts()
+        return {cartStore}
+    },
 
-       return {productStore, cartStore}
+    data(){
+        return {
+            products:[],
+        }
+    },
+    
+    mounted(){
+        setTimeout(() => {  (fetch('https://fakestoreapi.com/products')
+            .then(res => res.json())
+            .then(data => this.products = data)
+            .catch(err => console.log(err.message))); }, 10000);
+        
     }
 }
 

@@ -3,22 +3,25 @@ import { defineStore } from 'pinia'
 
 export const useCartStore = defineStore('cartStore', {
     state: () => ({
-        cart: [],
+        cart: JSON.parse(localStorage.getItem('cart')) || [],
         status: 'Your cart is empty',
-        subtotal: 0,
-        vat: 0,
-        total:0,
+        subtotal: parseFloat(localStorage.getItem('subtotal')) || 0,
+        vat: parseFloat(localStorage.getItem('vat')) || 0,
+        total:parseFloat(localStorage.getItem('total')) || 0,
     }),
     actions: {
         addToCart(product) {
             this.cart.push(product);
-            console.log(this.cart);
             this.calctotals();
+            this.updateLocalStorage();
+            
         },
 
         removeFromCart(item){
-            this.cart.splice(this.cart.indexOf(item), 1)
+            this.cart.splice(this.cart.indexOf(item), 1);
             this.calctotals();
+            this.updateLocalStorage();
+            
         },
 
         calctotals(){
@@ -26,6 +29,15 @@ export const useCartStore = defineStore('cartStore', {
             this.vat = parseFloat((this.subtotal * 0.1).toFixed(2));
             this.total = parseFloat((this.subtotal + this.vat).toFixed(2));
         },
+
+        updateLocalStorage() {
+            localStorage.setItem('cart', JSON.stringify(this.cart));
+            localStorage.setItem('subtotal', this.subtotal.toString());
+            localStorage.setItem('vat', this.vat.toString());
+            localStorage.setItem('total', this.total.toString());
+        },
+        
+
 
     }
     
