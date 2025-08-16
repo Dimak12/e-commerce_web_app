@@ -2,7 +2,7 @@
     <header>
         <div class="logo">
             <router-link to="/" class="router-link"><i class="fa-solid fa-store"></i></router-link>
-            <router-link to="/" class="router-link title">Goodies Store</router-link>
+            <router-link to="/" class="router-link title">Goodies</router-link>
         </div>
         <nav>
             <ul class="nav_links">
