@@ -2,15 +2,15 @@
     <header>
         <div class="logo">
             <router-link to="/" class="router-link"><i class="fa-solid fa-store"></i></router-link>
-            <router-link to="/" class="router-link title">Goodies Store</router-link>
+            <router-link to="/" class="router-link title">My Store</router-link>
         </div>
         <nav>
             <ul class="nav_links">
                 <li><router-link to="/products" class="link">Products</router-link></li>
                 <li>|</li>
-                <li><router-link to="/contacts" class="link">Contacts</router-link></li>
-                <li>|</li>
                 <li><router-link to="/about" class="link">About</router-link></li>
+                <li>|</li>
+                <li><router-link to="/contacts" class="link">Contacts</router-link></li>
             </ul>
             
         </nav>
@@ -40,14 +40,20 @@ export default {
 
 <style scoped>
 
-     header {
+    *{
+        background-color: #34b3a0;
+    }
+
+    header {
         display: grid;
         grid-template-columns: 0.7fr 1fr 1fr;
         align-content: center;
         padding: 30px 20px;
         height: 80px;
-        background-color: #34b3a0;
-        
+        /* Make header sticky */
+        position: sticky;
+        top: 0;
+        z-index: 100;
     }
 
     button{
@@ -56,7 +62,7 @@ export default {
         width: 50px;
         border: 3px solid;
         cursor: pointer;
-        background-color: #34b3a0;
+        position: relative; /* Add this for cart count positioning */
     }
 
     .logo {
@@ -73,10 +79,10 @@ export default {
     }
     
     .nav_links{
-        display: flex;
         list-style: none;
         font-size: 20px;
         font-weight: bold;
+        display: flex;
         justify-content: center;
         
     }
@@ -91,7 +97,6 @@ export default {
     .link{
         color: inherit; 
         text-decoration: none;
-        
     }
 
     
@@ -122,8 +127,8 @@ export default {
         padding: 2px 6px;
         font-size: 12px;
         position: absolute;
-        top: 0;
-        right: 1;
-}
+        top: -5px;
+        right: -5px;
+    }
 
 </style>
