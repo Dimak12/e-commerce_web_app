@@ -40,16 +40,13 @@ export default {
 
 <style scoped>
 
-    *{
-        background-color: #34b3a0;
-    }
-
-    header {
+     header {
         display: grid;
         grid-template-columns: 0.7fr 1fr 1fr;
         align-content: center;
         padding: 30px 20px;
         height: 80px;
+        background-color: #34b3a0;
         
     }
 
@@ -59,6 +56,7 @@ export default {
         width: 50px;
         border: 3px solid;
         cursor: pointer;
+        background-color: #34b3a0;
     }
 
     .logo {

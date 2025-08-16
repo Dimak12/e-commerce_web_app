@@ -1,169 +1,250 @@
-<!-- cart.vue -->
-
 <template>
-    <div class="cart-page">
-        <div class="main">
-            <div class="status" v-if="cartStore.cart.length === 0"><h1>{{cartStore.status}}</h1></div>
-            <div class="cart-container" v-else>
-                <div class="cart-item" v-for="item in cartStore.cart" :key="item.id">
-                    <img :src="item.image" class="product-image" />
-                    <div class="details">
-                        <div class="title">{{ item.title }}</div>
-                        <div class="category">{{ item.category }}</div>
-                        <div class="price">${{ item.price }}</div>
-                    </div>
-                    <button class="remove-btn" @click="cartStore.removeFromCart(item)"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-            </div>
-            <div class="checkout">
-                <div class="elements subtotal">
-                    <p>Subtotal</p>
-                    <p>${{cartStore.subtotal}}</p>
-                </div>
-                <div class="elements vat">
-                    <p>VAT</p>
-                    <p>${{cartStore.vat}}</p>
-                </div>
-                <div class="elements total">
-                    <p>Total</p>
-                    <p>${{cartStore.total}}</p>
-                </div>
-                <div class="elements coupon">
-                    <label for="">Coupon</label>
-                    <input type="text">
-                </div>
-                <div class="elements btn"><button>Check Out</button></div>
-            </div>
-        </div>
+  <div class="cart-page">
+    <div class="empty-cart" v-if="cartStore.cart.length === 0">
+      <i class="fa-solid fa-cart-arrow-down empty-icon"></i>
+      <h2>Your Cart is Empty</h2>
+      <p>Looks like you haven't added any goodies yet.</p>
+      <router-link to="/products" class="shop-now-btn">Shop Now</router-link>
     </div>
-    
+
+    <div class="main-grid" v-else>
+      <div class="cart-items-container">
+        <div class="cart-item" v-for="item in cartStore.cart" :key="item.id">
+          <img :src="item.image" class="product-image" />
+          <div class="details">
+            <div class="title">{{ item.title }}</div>
+            <div class="category">{{ item.category }}</div>
+            <div class="price">${{ item.price }}</div>
+          </div>
+          <button class="remove-btn" @click="cartStore.removeFromCart(item)">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="checkout-summary">
+        <h2>Order Summary</h2>
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span>${{ cartStore.subtotal }}</span>
+        </div>
+        <div class="summary-row">
+          <span>VAT (20%)</span>
+          <span>${{ cartStore.vat }}</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <span>${{ cartStore.total }}</span>
+        </div>
+        <div class="coupon">
+          <input type="text" placeholder="Enter Coupon Code" />
+          <button class="apply-btn">Apply</button>
+        </div>
+        <button class="checkout-btn">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import { useCartStore } from '@/stores/cartStore';
+import { useCartStore } from "@/stores/cartStore";
 
 export default {
-    setup () {
-        const cartStore = useCartStore()
-
-        return {cartStore}
-    }
-    
-}
+  setup() {
+    const cartStore = useCartStore();
+    return { cartStore };
+  },
+};
 </script>
 
 <style scoped>
+.cart-page {
+  background-color: #f8f9fa;
+  padding: 30px;
+  min-height: calc(100vh - 130px);
+}
 
-    .cart-page {
-        max-height: calc(100vh - 130px);
-        overflow-y: auto;
-        padding-bottom: 20px; 
-    }
+.main-grid {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  gap: 30px;
+  align-items: flex-start;
+}
 
-    .main {
-        display: grid;
-        grid-template-columns: 3fr 1fr;
-        background-color: white;
-        padding: 10px 10px;
-        gap: 40px;
-        height: calc(97vh - 130px);
-    }
+.cart-items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
-    .cart-container {
-        display: grid;
-        border: 1px solid;
-        gap: 10px;
-        padding: 10px;
-        max-height: calc(97vh - 130px);
-        overflow-y: auto; 
-        grid-template-columns: 1fr 1fr 1fr;
-    }
+.cart-item {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  gap: 20px;
+}
 
-    .cart-item {
-        display: grid;
-        grid-template-columns: 1fr 2fr 0.3fr;
-        margin-bottom: 10px;
-        margin-top: 10px;
-        border: 1px solid;
-        gap: 10px;
-        align-items: center;
-        width: 340px;
-        height: 200px;
-        justify-self: center;
-    }
+.product-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  background-color: #fff;
+  border-radius: 4px;
+}
 
-    .product-image{
-        width:100%;
-        height: 100%;
-        max-width: 150px; 
-        max-height: 100%;
-        grid-area: 1/1/2/3;
-        justify-self: center;
-        grid-column: 1/2;
-        border-right: 1px solid;
-    }
+.details {
+  flex-grow: 1;
+}
 
-    .details{
-        grid-column: 2/3;
-    }
+.title {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
 
-    .checkout{
-        grid-column: 2/3;
-        border: 1px solid;
-        padding: 10px;
-        
-    }
+.category {
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
 
-    .elements{
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 15px;
-    }
+.price {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
 
-    .subtotal{
-        margin-top: 15px;
-    }
+.remove-btn {
+  background: none;
+  border: none;
+  color: #dc3545;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
 
-    .btn{
-        justify-content: center;
-        margin-top: 40px;
-        
-    }
-    .btn button{
-        width: 200px;
-        background: #34b3a0;
-        height: 30px;
-        box-shadow: 4px 5px 9px #34b3a0;
-        font-family: roboto;
-        font-weight: bold;
-        border: 1px solid;
-        cursor: pointer;
-    }
+.remove-btn:hover {
+  background-color: #fbebee;
+  color: #b02a37;
+}
 
-    .remove-btn{
-        cursor: pointer;
-        border-radius: 500px;
-        grid-column: 3/4;
-        height: 20px;
-        width: 20px;
-        border-color: red;
-        color: red;
-        background-color: white;
-    }
+/* Checkout Summary Card */
+.checkout-summary {
+  background-color: white;
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  position: sticky; /* Makes it stay in place on scroll */
+  top: 20px;
+}
 
-    .title{
-        margin-bottom: 10px;
-        font-weight: bold;
-        font-size: 18px;
-    }
+.checkout-summary h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
 
-    .category{
-        margin-bottom: 10px;
-    }
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  color: #555;
+}
 
-    .status{
-        justify-self: center;
-        align-self: center;
-    }
+.summary-row.total {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #333;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
 
+.coupon {
+  display: flex;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.coupon input {
+  flex-grow: 1;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.coupon .apply-btn {
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  padding: 0 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.checkout-btn {
+  width: 100%;
+  padding: 15px;
+  background: #34b3a0;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 25px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 9px rgba(52, 179, 160, 0.4);
+}
+
+.checkout-btn:hover {
+  background: #2a8d7d;
+}
+
+/* Empty Cart Styles */
+.empty-cart {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.empty-icon {
+  font-size: 5rem;
+  color: #34b3a0;
+  margin-bottom: 20px;
+}
+
+.empty-cart h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.empty-cart p {
+  color: #6c757d;
+  margin-bottom: 30px;
+}
+
+.shop-now-btn {
+  background-color: #34b3a0;
+  color: white;
+  padding: 15px 30px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.shop-now-btn:hover {
+  background-color: #2a8d7d;
+}
 </style>
