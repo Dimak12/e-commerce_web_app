@@ -1,19 +1,39 @@
-# e-commerce_web_app
+# 🛍️ Goodies Store
 
-## Project setup
-```
+A modern, responsive **e-commerce web application** built with Vue.js 3 and Vite.  
+It features live product data, a shopping cart with state management, and a clean responsive design.
+
+## 🚀 Features
+- **Product Catalog**: Fetches products dynamically from FakeStoreAPI.
+- **Shopping Cart**: Add/remove items, view totals, and persist cart state with Pinia.
+- **Routing**: Smooth navigation with Vue Router.
+- **Responsive Design**: Works seamlessly across devices.
+- **Reusable Components**: Header, Footer, and modular UI.
+
+## 🛠️ Tech Stack
+- Vue.js 3
+- Pinia (State Management)
+- Vite
+- JavaScript (ES6+)
+- REST API Integration
+- CSS (Flexbox, Grid)
+
+## 📦 Installation
+```bash
+# Clone repo
+git clone https://github.com/Dimak12/goodies-store.git
+cd goodies-store
+
+# Install dependencies
 npm install
+
+# Run development server
+npm run dev
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## 🌐 Live Demo
+[Goodies Store on Netlify](https://goodiesstore.netlify.app)
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 📜 License
+MIT License
