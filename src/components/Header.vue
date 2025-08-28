@@ -130,6 +130,11 @@ header {
 }
 
 /* Cart */
+
+.cart {
+  text-decoration: none;
+}
+
 .cart button {
   border-radius: 50%;
   height: 50px;
@@ -138,7 +143,6 @@ header {
   cursor: pointer;
   position: relative;
   background: #34b3a0;
-  text-decoration: none;
   color: inherit,
 }
 
