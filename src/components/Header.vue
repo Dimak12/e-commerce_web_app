@@ -139,6 +139,7 @@ header {
   position: relative;
   background: #34b3a0;
   text-decoration: none;
+  color: inherit,
 }
 
 .cart-count {
