@@ -78,14 +78,6 @@ header {
   z-index: 100;
 }
 
-/* Remove tap highlight on mobile */
-a,
-button,
-.router-link{
-  -webkit-tap-highlight-color: transparent; /* iOS Safari / Chrome */
-  outline: none;
-}
-
 .logo {
   display: flex;
   align-items: center;
@@ -151,9 +143,6 @@ button,
   cursor: pointer;
   position: relative;
   background: #34b3a0;
-  color: inherit;
-  -webkit-tap-highlight-color: transparent; /* iOS Safari / Chrome */
-  outline: none;
 }
 
 .cart-count {
