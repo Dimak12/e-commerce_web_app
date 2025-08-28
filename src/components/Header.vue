@@ -138,6 +138,7 @@ header {
   cursor: pointer;
   position: relative;
   background: #34b3a0;
+  text-decoration: none;
 }
 
 .cart-count {
