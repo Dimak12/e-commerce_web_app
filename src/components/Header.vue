@@ -78,6 +78,15 @@ header {
   z-index: 100;
 }
 
+a,
+a:visited,
+a:active,
+a:focus {
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
 .logo {
   display: flex;
   align-items: center;
