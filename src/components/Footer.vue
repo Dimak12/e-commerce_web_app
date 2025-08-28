@@ -1,28 +1,29 @@
 <template>
-    <footer>
-        
-        <p>Goodies Store</p>
-    </footer>
+  <footer class="footer">
+    <div>© 2025 Goodies Store</div>
+    <div>All rights reserved</div>
+  </footer>
 </template>
 
 <script>
-
 export default {
-    name: 'Footer'
-    
-}
+  name: "Footer",
+};
 </script>
 
 <style scoped>
-    footer{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 50px;
-        background-color: #34b3a0;
-        padding: 0px 20px;
-    }
+.footer {
+  background: #333;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  text-align: center;
+}
 
-    
-
+.footer div {
+  flex: 1 1 200px;
+}
 </style>

@@ -105,6 +105,19 @@ h1 {
   gap: 40px;
 }
 
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr; /* stack vertically */
+    gap: 20px;
+  }
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  max-width: 100%; /* prevent overflow */
+}
+
 .contact-info h3 {
   font-size: 1.5rem;
   color: #34b3a0;

@@ -46,25 +46,34 @@ export default {
     url("https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070")
       no-repeat center center/cover;
   color: white;
-  padding: 100px 20px;
+  padding: 80px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 60vh;
+  min-height: 60vh; /* instead of fixed height */
+  text-align: center;
 }
 
 .hero h1 {
-  font-size: 3.5rem;
+  font-size: 3rem;
   margin-bottom: 20px;
   font-family: "Roboto Mono", monospace;
 }
 
 .hero p {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   margin-bottom: 30px;
 }
 
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .hero p {
+    font-size: 1rem;
+  }
+}
 .cta-button {
   background-color: #34b3a0;
   color: white;
@@ -85,14 +94,15 @@ export default {
 }
 
 .features {
-  display: flex;
-  justify-content: space-around;
-  padding: 60px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 40px 20px;
   background-color: white;
+  text-align: center;
 }
 
 .feature-item {
-  flex-basis: 30%;
   padding: 20px;
 }
 
@@ -103,7 +113,7 @@ export default {
 }
 
 .feature-item h3 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin-bottom: 10px;
 }
 </style>

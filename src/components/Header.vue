@@ -1,134 +1,203 @@
 <template>
-    <header>
-        <div class="logo">
-            <router-link to="/" class="router-link"><i class="fa-solid fa-store"></i></router-link>
-            <router-link to="/" class="router-link title">Goodies</router-link>
-        </div>
-        <nav>
-            <ul class="nav_links">
-                <li><router-link to="/products" class="link">Products</router-link></li>
-                <li>|</li>
-                <li><router-link to="/about" class="link">About</router-link></li>
-                <li>|</li>
-                <li><router-link to="/contacts" class="link">Contacts</router-link></li>
-            </ul>
-            
-        </nav>
-        <router-link class="cart" to="/cart">
-            <button>
-                <font-awesome-icon :icon="['fas', 'cart-shopping']" size="2x"/>
-                <span class="cart-count" v-if="cartStore.cart.length > 0">{{ cartStore.cart.length }}</span>
-            </button>
-        </router-link>
-    </header>
+  <header>
+    <!-- Logo (only icon on mobile) -->
+    <div class="logo">
+      <router-link to="/" class="router-link">
+        <i class="fa-solid fa-store"></i>
+        <span class="title desktop-only">Goodies</span>
+      </router-link>
+    </div>
+
+    <!-- Burger button (mobile only) -->
+    <button class="burger" @click="toggleMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- Navigation -->
+    <nav :class="['nav_links', { open: isMenuOpen }]">
+      <ul>
+        <li>
+          <router-link to="/products" class="link" @click="closeMenu">
+            Products
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/about" class="link" @click="closeMenu">
+            About
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/contacts" class="link" @click="closeMenu">
+            Contacts
+          </router-link>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Cart always visible -->
+    <router-link class="cart" to="/cart">
+      <button>
+        <font-awesome-icon :icon="['fas', 'cart-shopping']" size="2x" />
+        <span class="cart-count" v-if="cartStore.cart.length > 0">
+          {{ cartStore.cart.length }}
+        </span>
+      </button>
+    </router-link>
+  </header>
 </template>
 
 <script>
-
-import { useCartStore } from '@/stores/cartStore';
+import { ref } from "vue";
+import { useCartStore } from "@/stores/cartStore";
 
 export default {
-    
-    name:'Header',
-    setup () {
-        const cartStore = useCartStore()
+  name: "Header",
+  setup() {
+    const cartStore = useCartStore();
+    const isMenuOpen = ref(false);
 
-        return {cartStore}
-    }
-}
+    const toggleMenu = () => (isMenuOpen.value = !isMenuOpen.value);
+    const closeMenu = () => (isMenuOpen.value = false);
+
+    return { cartStore, isMenuOpen, toggleMenu, closeMenu };
+  },
+};
 </script>
 
 <style scoped>
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background-color: #34b3a0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 
-    *{
-        background-color: #34b3a0;
-    }
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+}
 
-    header {
-        display: grid;
-        grid-template-columns: 0.7fr 1fr 1fr;
-        align-content: center;
-        padding: 30px 20px;
-        height: 80px;
-        /* Make header sticky */
-        position: sticky;
-        top: 0;
-        z-index: 100;
-    }
+.router-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+}
 
-    button{
-        border-radius: 50px;
-        height: 50px;
-        width: 50px;
-        border: 3px solid;
-        cursor: pointer;
-        position: relative; /* Add this for cart count positioning */
-    }
+.router-link i {
+  font-size: 40px;
+  margin-right: 10px;
+}
 
-    .logo {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        cursor: pointer;
-        font-size: 30px;
-        
-    }
+.title {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
 
-    nav{
-        align-self: center;
-    }
-    
-    .nav_links{
-        list-style: none;
-        font-size: 20px;
-        font-weight: bold;
-        display: flex;
-        justify-content: center;
-        
-    }
+/* Hide title on mobile */
+.desktop-only {
+  display: inline;
+}
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none;
+  }
+}
 
-    .nav_links li{
-        display: inline-block;
-        padding: 0px 8px;
-        color: inherit; 
-        text-decoration: none;
-    }
+/* Nav */
+.nav_links {
+  display: flex;
+  gap: 20px;
+}
 
-    .link{
-        color: inherit; 
-        text-decoration: none;
-    }
+.nav_links ul {
+  display: flex;
+  list-style: none;
+  gap: 15px;
+}
 
-    
-    .router-link{
-       text-decoration: none;
-       color: inherit; 
-    }
+.link {
+  text-decoration: none;
+  font-weight: bold;
+  color: inherit;
+}
 
-    .router-link i{
-        font-size:60px;
-    }
+/* Cart */
+.cart button {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  border: 3px solid;
+  cursor: pointer;
+  position: relative;
+  background: #34b3a0;
+}
 
-    .cart{
-        display:flex;
-        justify-self: end;
-        text-decoration: none;
-        flex:1;
-    }
+.cart-count {
+  background-color: rgb(204, 43, 43);
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
 
-    .title{
-        font-weight: bold;
-    }
+/* Burger */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 0 auto; /* Center burger */
+}
 
-    .cart-count {
-        background-color: rgb(204, 43, 43);
-        color: white;
-        border-radius: 50%;
-        padding: 2px 6px;
-        font-size: 12px;
-        position: absolute;
-        top: -5px;
-        right: -5px;
-    }
+.burger span {
+  width: 25px;
+  height: 3px;
+  background: white;
+  border-radius: 2px;
+}
 
+/* Responsive */
+@media (max-width: 768px) {
+.nav_links {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%); /* center under burger */
+    background: #34b3a0;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px;
+    width: 200px; /* fixed width for nice alignment */
+  }
+
+  .nav_links.open {
+    display: flex;
+  }
+
+  .nav_links ul {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .burger {
+    display: flex;
+  }
+}
 </style>

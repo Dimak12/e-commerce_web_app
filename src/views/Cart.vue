@@ -68,7 +68,17 @@ export default {
   display: grid;
   grid-template-columns: 2.5fr 1fr;
   gap: 30px;
-  align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+  .main-grid {
+    grid-template-columns: 1fr; /* stack */
+  }
+  .checkout-summary {
+    position: relative; /* remove sticky on mobile */
+    top: auto;
+    margin-top: 20px;
+  }
 }
 
 .cart-items-container {

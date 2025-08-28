@@ -44,6 +44,13 @@ export default {
 </script>
 
 <style scoped>
+
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
 .about-container {
   display: flex;
   justify-content: center;
